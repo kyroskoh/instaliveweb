@@ -16,6 +16,11 @@ $(document).ready(function () {
         $("#status_live").text("Running");
         $("#msg_live").val(response.message);
         hideLoading();
+
+        Swal.fire("You're Live!", "Live Streaming is Starting...!", "success");
+
+        $("#stopBroadcast").prop("disabled", false);
+        $("#startBroadcast").prop("disabled", true);
       },
       error: function (response) {
         Swal.fire(
@@ -41,6 +46,11 @@ $(document).ready(function () {
         $("#status_live").text("Stopped");
         $("#msg_live").val(response.message);
         hideLoading();
+
+        Swal.fire("You're Off!", "Live Streaming is Stopping...!", "success");
+
+        $("#stopBroadcast").prop("disabled", true);
+        $("#startBroadcast").prop("disabled", false);
       },
       error: function (response) {
         Swal.fire(
