@@ -18,6 +18,13 @@ $(document).ready(function () {
         hideLoading();
       },
       error: function (response) {
+        Swal.fire(
+          "Stream Key Expired",
+          "Please re-login to regenerate the key",
+          "error"
+        ).then(function () {
+          window.location = "/";
+        });
         hideLoading();
       },
     });
@@ -36,6 +43,11 @@ $(document).ready(function () {
         hideLoading();
       },
       error: function (response) {
+        Swal.fire(
+          "Stream Key Expired",
+          "Please re-login for refreshing the key",
+          "error"
+        );
         hideLoading();
       },
     });
