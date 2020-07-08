@@ -1,43 +1,43 @@
-{% extends 'layouts/base.html' %}
-{% block content %}
+{% extends 'layouts/base.html' %} {% block content %}
 <div class="container">
-      <div
-        class="d-flex align-items-center justify-content-center"
-        style="height: 100vh;"
-      >
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-center mb-4">Instagram Live</h5>
-            <p class="card-subtitle mb-4 text-muted">
-              Please log in to your instagram account.
-            </p>
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Username</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                />
-                <small id="emailHelp" class="form-text text-muted"
-                  >We'll never share your accounts with anyone else.</small
-                >
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">
-                Login
-              </button>
-            </form>
+  <div
+    class="d-flex align-items-center justify-content-center"
+    style="height: 100vh;"
+  >
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-4">Instagram Live</h5>
+        <p class="card-subtitle mb-4 text-muted">
+          Please log in to your instagram account.
+        </p>
+        <form action="/login" method="post">
+          <div class="form-group">
+            <label for="inputUsername">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputUsername"
+              name="username"
+            />
           </div>
-        </div>
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="inputPassword"
+              name="password"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >We'll never share your accounts with anyone else.</small
+            >
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Login
+          </button>
+        </form>
       </div>
     </div>
-    {% endblock content %}
+  </div>
+</div>
+{% endblock content %}
