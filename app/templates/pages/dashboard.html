@@ -1,0 +1,66 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<div class="container">
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="height: 100vh;"
+      >
+      
+        <div class="card mr-5" style="width: 30em;">
+          <div class="card-body">
+            <h5 class="card-title text-center mb-4">Instagram Live</h5>
+            <p class="card-subtitle mb-4 text-muted text-center">
+              You're live!
+            </p>
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Broadcast ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  value="17852234378140489"
+                  disabled
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Server URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  value="rtmps://live-upload.instagram.com:443/rtmp/"
+                  disabled
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Server Key</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="server-key"
+                  value="17852234378140489?s_efg=eyJxZV9ncm91cHMiOnsiaWdfbGl2ZV9lbmFibGVfcG9wX3ByaW1pbmciOnsiZW5hYmxlZCI6InRydWUifSwiaWdfbGl2ZV9ub3RpZmljYXRpb25zX2FmdGVyX2ZpcnN0X21wZF91bml2ZXJzZSI6W10sImlnX2xvd19sYXRlbmN5X3Byb2R1Y3Rpb25fdW5pdmVyc2UiOnsiZW5hYmxlZCI6InRydWUifX19&s_sw=0&s_vt=ig&a=Abz4lyrnJKbICyMm"
+                  />
+              </div>
+              <button type="submit" class="btn btn-success btn-block" data-clipboard-action="copy" data-clipboard-target="#server-key" >
+                Copy Server Key to Clipboard
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card" style="width: 20em">
+          <div class="card-body">
+            <h5 class="card-title text-center mb-4">Dashboard Actions</h5>
+              <button type="submit" class="btn btn-danger btn-block">
+                Stop Live
+              </button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    {% endblock content %}
