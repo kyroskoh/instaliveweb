@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
 from ItsAGramLive import ItsAGramLive
 import json
-from app.utils import fromPickle, toPickle
+from app.utils import fromPickle, toPickle, start_broadcast, stop_broadcast
 base = Blueprint('base', __name__)
 
 @base.route('/')
@@ -29,3 +29,17 @@ def login_handle():
         flash("You're not live, start broadcast after you set the server key")
         return redirect(url_for('base.info_route'))
     return redirect(url_for('base.login_route'))
+
+@base.route('/start_broadcast')
+def start():
+    if start_broadcast():
+        return {"status":"running","message":"You're live!!"}, 200
+    else:
+        return {"status":"error","message":"You're not live, start broadcast after you set the server key"}, 403
+
+@base.route('/stop_broadcast')
+def stop():
+    if stop_broadcast():
+        return {"status":"stopped","message":"The broadcast is ended"}, 200
+    else:
+        return {"status":"error","message":"something wrong here"}, 403

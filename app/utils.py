@@ -9,3 +9,13 @@ def toPickle(obj):
 def fromPickle():
     f = open("pickle_data", "rb")
     return pickle.load(f)
+
+def start_broadcast():
+    ig = fromPickle()
+    ig.login(force=True)
+    return ig.start_broadcast()
+
+def stop_broadcast():
+    ig = fromPickle()
+    ig.login(force=True)
+    return ig.end_broadcast()

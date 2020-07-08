@@ -48,8 +48,8 @@
       <div class="actions">
         <div class="card" style="width: 20em">
           <div class="card-body">
-            <h5 class="card-title text-center mb-4">Status</h5>
-            <textarea class="form-control" style="text-align: center; resize: none;" id="exampleFormControlTextarea1" rows="2" disabled>{% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}{% endwith %}</textarea>
+            <h5 class="card-title text-center mb-4">Status: <span id="status_live">Idle</span></h5>
+            <textarea class="form-control" style="text-align: center; resize: none;" id="msg_live" rows="2" disabled>{% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}{% endwith %}</textarea>
             </form>
           </div>
         </div>
@@ -57,10 +57,10 @@
         <div class="card mt-5" style="width: 20em">
           <div class="card-body">
             <h5 class="card-title text-center mb-4">Dashboard Actions</h5>
-            <button type="submit" class="btn btn-success btn-block">
+            <button type="submit" class="btn btn-success btn-block" id='startBroadcast'>
               Start Broadcast
             </button>
-              <button type="submit" class="btn btn-danger btn-block" disabled>
+              <button type="submit" class="btn btn-danger btn-block" id='stopBroadcast'>
                 Stop Live
               </button>
             </form>
