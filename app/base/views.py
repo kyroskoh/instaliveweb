@@ -23,7 +23,8 @@ def login_handle():
     session['data_stream'] = {
         'broadcast_id':live.broadcast_id,
         'stream_server':live.stream_server,
-        'stream_key':live.stream_key
+        'stream_key':live.stream_key,
+        'status':'Idle',
     }
     if live.isLoggedIn:
         flash("You're not live, start broadcast after you set the server key")
@@ -33,6 +34,7 @@ def login_handle():
 @base.route('/start_broadcast')
 def start():
     if start_broadcast():
+        session['data_stream']['status'] = 'Running'
         return {"status":"running","message":"You're live!!"}, 200
     else:
         return {"status":"error","message":"You're not live, start broadcast after you set the server key"}, 403
@@ -40,6 +42,7 @@ def start():
 @base.route('/stop_broadcast')
 def stop():
     if stop_broadcast():
+        session['data_stream']['status'] = 'Stopped'
         return {"status":"stopped","message":"The broadcast is ended"}, 200
     else:
         return {"status":"error","message":"something wrong here"}, 403

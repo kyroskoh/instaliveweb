@@ -11,7 +11,7 @@ $(document).ready(function () {
       url: "/start_broadcast",
       success: function (response) {
         $("#status_live").text("Running");
-        $("#msg_live").val(response.data.message);
+        $("#msg_live").val(response.message);
       },
     });
   });
@@ -22,7 +22,7 @@ $(document).ready(function () {
       url: "/stop_broadcast",
       success: function (response) {
         $("#status_live").text("Stopped");
-        $("#msg_live").val(response.data.message);
+        $("#msg_live").val(response.message);
       },
     });
   });
