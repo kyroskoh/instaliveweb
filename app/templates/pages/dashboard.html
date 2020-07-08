@@ -8,19 +8,15 @@
       
         <div class="card mr-5" style="width: 30em;">
           <div class="card-body">
-            <h5 class="card-title text-center mb-4">Instagram Live</h5>
-            <p class="card-subtitle mb-4 text-muted text-center">
-              You're live!
-            </p>
+            <h5 class="card-title text-center mb-4">Server Configuration</h5>
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Broadcast ID</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  value="17852234378140489"
+                  id="broadcast_id"
+                  value={{data_stream.broadcast_id}}
                   disabled
                 />
               </div>
@@ -29,8 +25,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="exampleInputPassword1"
-                  value="rtmps://live-upload.instagram.com:443/rtmp/"
+                  id="stream_server"
+                  value={{data_stream.stream_server}}
                   disabled
                 />
               </div>
@@ -39,11 +35,11 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="server-key"
-                  value="17852234378140489?s_efg=eyJxZV9ncm91cHMiOnsiaWdfbGl2ZV9lbmFibGVfcG9wX3ByaW1pbmciOnsiZW5hYmxlZCI6InRydWUifSwiaWdfbGl2ZV9ub3RpZmljYXRpb25zX2FmdGVyX2ZpcnN0X21wZF91bml2ZXJzZSI6W10sImlnX2xvd19sYXRlbmN5X3Byb2R1Y3Rpb25fdW5pdmVyc2UiOnsiZW5hYmxlZCI6InRydWUifX19&s_sw=0&s_vt=ig&a=Abz4lyrnJKbICyMm"
+                  id="stream_key"
+                  value={{data_stream.stream_key}}
                   />
               </div>
-              <button type="submit" class="btn btn-success btn-block" data-clipboard-action="copy" data-clipboard-target="#server-key" >
+              <button type="submit" class="btn btn-success btn-block" data-clipboard-action="copy" data-clipboard-target="#stream_key" >
                 Copy Server Key to Clipboard
               </button>
             </form>
@@ -53,7 +49,7 @@
         <div class="card" style="width: 20em">
           <div class="card-body">
             <h5 class="card-title text-center mb-4">Status</h5>
-            <textarea class="form-control" style="text-align: center; resize: none;" id="exampleFormControlTextarea1" rows="2" disabled>You're not live, start broadcast after you set the server key</textarea>
+            <textarea class="form-control" style="text-align: center; resize: none;" id="exampleFormControlTextarea1" rows="2" disabled>{% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}{% endwith %}</textarea>
             </form>
           </div>
         </div>
