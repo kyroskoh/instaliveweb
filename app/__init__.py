@@ -1,8 +1,9 @@
 from flask import Flask
+from config import config as Config
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'very_secret_you_cant_even_break_it'
+    app.config.from_object(Config['development'])
     # Routes
     from app.base.views import base
     
