@@ -28,7 +28,7 @@ env\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 
-#### > Running on Local
+## Running on Local
 
 ```sh
 set FLASK_ENV=development
