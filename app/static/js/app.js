@@ -1,6 +1,6 @@
-$(document).ready(function () {
-  var is_live_now = true;
+var is_live_now = true;
 
+$(document).ready(function () {
   // clipboard
   var clipboard = new ClipboardJS(".btn");
   clipboard.on("success", function (e) {
