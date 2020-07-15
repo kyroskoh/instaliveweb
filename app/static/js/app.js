@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  var is_live_now = true;
+
   // clipboard
   var clipboard = new ClipboardJS(".btn");
   clipboard.on("success", function (e) {
@@ -21,6 +23,8 @@ $(document).ready(function () {
 
         $("#stopBroadcast").prop("disabled", false);
         $("#startBroadcast").prop("disabled", true);
+        is_live_now = true;
+        pool_viewers();
       },
       error: function (response) {
         Swal.fire(
@@ -51,6 +55,8 @@ $(document).ready(function () {
 
         $("#stopBroadcast").prop("disabled", true);
         $("#startBroadcast").prop("disabled", false);
+
+        is_live_now = false;
       },
       error: function (response) {
         Swal.fire(
@@ -75,5 +81,21 @@ function hideLoading() {
   $("#dashboard_action").LoadingOverlay("hide", {
     background: "rgba(0, 0, 0, 0.5)",
     imageColor: "#fff",
+  });
+}
+
+function pool_viewers() {
+  $.ajax({
+    type: "GET",
+    url: "/v1/live/viewers",
+    dataType: "json",
+    success: function (response) {
+      $("#viewers_count").text(response.count);
+    },
+    complete: function () {
+      if (is_live_now) {
+        setTimeout(pool_viewers, 10000);
+      }
+    },
   });
 }

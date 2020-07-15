@@ -59,7 +59,10 @@
                 >{{data_stream['status']}}</span
               >
             </li>
-            <li>Viewers: <span class="font-weight-bold">0</span></li>
+            <li>
+              Viewers:
+              <span class="font-weight-bold" id="viewers_count">0</span>
+            </li>
           </ul>
 
           <textarea
@@ -71,7 +74,7 @@
           >
 {% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}{% endwith %}</textarea
           >
-          <small>*Information updated every 15 seconds</small>
+          <small>*Information updated every 10 seconds</small>
         </div>
       </div>
 
