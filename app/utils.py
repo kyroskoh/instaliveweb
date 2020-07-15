@@ -19,3 +19,9 @@ def stop_broadcast():
     ig = fromPickle()
     ig.login(force=True)
     return ig.end_broadcast()
+
+def get_viewers():
+    ig = fromPickle()
+    ig.login(force=True)
+    user, id = ig.get_viewer_list()
+    return user
