@@ -10,5 +10,5 @@ def home():
     viewers = get_viewers()
     return {
         'count':len(viewers),
-        'list_users':viewers
+        'list_viewers':viewers
         },200
