@@ -15,20 +15,23 @@ def info_route():
 @base.route('/login', methods=['POST'])
 def login_handle():
     live = ItsAGramLive(username=request.form['username'],password=request.form['password'])
-    live.login()
-    live.create_broadcast()
-    # convert to pickle and store it on file
-    toPickle(live)
+    if live.login():
+        live.create_broadcast()
+        # convert to pickle and store it on file
+        toPickle(live)
 
-    session['data_stream'] = {
-        'broadcast_id':live.broadcast_id,
-        'stream_server':live.stream_server,
-        'stream_key':live.stream_key,
-        'status':'Idle',
-    }
-    if live.isLoggedIn:
-        flash("You're not live, start broadcast after you set the server key")
+        session['data_stream'] = {
+            'broadcast_id':live.broadcast_id,
+            'stream_server':live.stream_server,
+            'stream_key':live.stream_key,
+            'status':'Idle',
+        }
+
         return redirect(url_for('base.info_route'))
+
+    
+    flash('Username or Password incorrect!')
+
     return redirect(url_for('base.login_route'))
 
 @base.route('/start_broadcast')
