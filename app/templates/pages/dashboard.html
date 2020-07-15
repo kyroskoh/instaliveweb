@@ -1,75 +1,101 @@
-{% extends 'layouts/base.html' %}
-{% block content %}
+{% extends 'layouts/base.html' %} {% block content %}
 <div class="container">
-      <div
-        class="d-flex align-items-center justify-content-center"
-        style="height: 100vh;"
-      >
-      
-        <div class="card mr-5" style="width: 30em;">
-          <div class="card-body">
-            <h5 class="card-title text-center mb-4">Server Configuration</h5>
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Broadcast ID</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="broadcast_id"
-                  value={{data_stream.broadcast_id}}
-                  disabled
-                />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Server URL</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="stream_server"
-                  value={{data_stream.stream_server}}
-                  disabled
-                />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Server Key</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="stream_key"
-                  value={{data_stream.stream_key}}
-                  />
-              </div>
-              <button type="submit" class="btn btn-success btn-block" data-clipboard-action="copy" data-clipboard-target="#stream_key" >
-                Copy Server Key to Clipboard
-              </button>
-            </form>
+  <div
+    class="d-flex align-items-center justify-content-center"
+    style="height: 100vh;"
+  >
+    <div class="card mr-5" style="width: 30em;">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-4">Server Configuration</h5>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Broadcast ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="broadcast_id"
+              value="{{data_stream.broadcast_id}}"
+              disabled
+            />
           </div>
-        </div>
-      <div class="actions">
-        <div class="card" style="width: 20em">
-          <div class="card-body">
-            <h5 class="card-title text-center mb-4">Status: <span id="status_live">{{data_stream['status']}}</span></h5>
-            <textarea class="form-control" style="text-align: center; resize: none;" id="msg_live" rows="2" disabled>{% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}{% endwith %}</textarea>
-            </form>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Server URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="stream_server"
+              value="{{data_stream.stream_server}}"
+              disabled
+            />
           </div>
-        </div>
-
-        <div class="card mt-5" style="width: 20em" id="dashboard_action">
-          <div class="card-body">
-            <h5 class="card-title text-center mb-4">Dashboard Actions</h5>
-            <button type="submit" class="btn btn-success btn-block" id='startBroadcast'>
-              Start Broadcast
-            </button>
-              <button type="submit" class="btn btn-danger btn-block" id='stopBroadcast' disabled>
-                Stop Live
-              </button>
-            </form>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Server Key</label>
+            <input
+              type="text"
+              class="form-control"
+              id="stream_key"
+              value="{{data_stream.stream_key}}"
+            />
           </div>
-        </div>
+          <button
+            type="submit"
+            class="btn btn-success btn-block"
+            data-clipboard-action="copy"
+            data-clipboard-target="#stream_key"
+          >
+            Copy Server Key to Clipboard
+          </button>
+        </form>
       </div>
-        
-        
-      </div>
-      
     </div>
-    {% endblock content %}
+    <div class="actions">
+      <div class="card" style="width: 20em;">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Live Information</h5>
+          <ul>
+            <li>
+              Status:
+              <span id="status_live" class="font-weight-bold"
+                >{{data_stream['status']}}</span
+              >
+            </li>
+            <li>Viewers: <span class="font-weight-bold">0</span></li>
+          </ul>
+
+          <textarea
+            class="form-control"
+            style="text-align: center; resize: none;"
+            id="msg_live"
+            rows="2"
+            disabled
+          >
+{% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}{{ message }}{% endfor %}{% endif %}{% endwith %}</textarea
+          >
+          <small>*Information updated every 15 seconds</small>
+        </div>
+      </div>
+
+      <div class="card mt-5" style="width: 20em;" id="dashboard_action">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Dashboard Actions</h5>
+          <button
+            type="submit"
+            class="btn btn-success btn-block"
+            id="startBroadcast"
+          >
+            Start Broadcast
+          </button>
+          <button
+            type="submit"
+            class="btn btn-danger btn-block"
+            id="stopBroadcast"
+            disabled
+          >
+            Stop Live
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
