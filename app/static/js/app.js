@@ -24,7 +24,7 @@ $(document).ready(function () {
         $("#stopBroadcast").prop("disabled", false);
         $("#startBroadcast").prop("disabled", true);
         is_live_now = true;
-        pool_viewers();
+        // pool_viewers();
       },
       error: function (response) {
         Swal.fire(

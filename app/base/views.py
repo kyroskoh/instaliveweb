@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
-from ItsAGramLive import ItsAGramLive
+from InstaLiveCLI import InstaLiveCLI
 import json
 from app.utils import fromPickle, toPickle, start_broadcast, stop_broadcast
 base = Blueprint('base', __name__)
@@ -14,11 +14,13 @@ def info_route():
 
 @base.route('/login', methods=['POST'])
 def login_handle():
-    live = ItsAGramLive(username=request.form['username'],password=request.form['password'])
-    if live.login():
+    live = InstaLiveCLI(username=request.form['username'],password=request.form['password'])
+    login_status = live.login()
+
+    if login_status:
         live.create_broadcast()
-        # convert to pickle and store it on file
-        toPickle(live)
+        
+        session['settings'] = live.settings
 
         session['data_stream'] = {
             'broadcast_id':live.broadcast_id,
