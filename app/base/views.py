@@ -18,6 +18,11 @@ def login_route():
 @base.route('/dashboard')
 def info_route():
 
+    try:
+        settings = session['settings']
+    except:
+        return redirect(url_for('base.login_route'))
+
     print('> Update Broadcast Status')
     live = InstaLiveCLI(auth=session['settings'])
     session['settings']['data_stream']['status'] = live.get_broadcast_status()
@@ -33,6 +38,11 @@ def refresh_handle():
     
     return redirect(url_for('base.info_route'))
 
+@base.route('/dashboard/logout')
+def logout_handle():
+    session.pop('settings',None)
+    
+    return redirect(url_for('base.login_route'))
 
 @base.route('/login', methods=['POST'])
 def login_handle():
