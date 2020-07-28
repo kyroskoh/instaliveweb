@@ -81,10 +81,14 @@
       <div class="card mt-5" style="width: 20em;" id="dashboard_action">
         <div class="card-body">
           <h5 class="card-title text-center mb-4">Dashboard Actions</h5>
+          
           <button
             type="submit"
             class="btn btn-success btn-block"
             id="startBroadcast"
+            {% if data_stream['status'] == 'active' %}
+              disabled
+            {% endif %}
           >
             Start Broadcast
           </button>
@@ -92,10 +96,20 @@
             type="submit"
             class="btn btn-danger btn-block"
             id="stopBroadcast"
-            disabled
+            {% if data_stream['status'] != 'active' %}
+              disabled='false'
+            {% endif %}
+            
           >
             Stop Live
           </button>
+          <hr>
+          <a href="/dashboard/refresh_key" type="submit"
+          class="btn btn-warning btn-block"
+          id="refreshKey">Refresh Server Key</a>
+          <a href="/dashboard/logout" type="submit"
+          class="btn btn-danger btn-block"
+          id="logoutAccount">Logout Account</a>
         </div>
       </div>
     </div>

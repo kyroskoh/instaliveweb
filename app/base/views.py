@@ -1,33 +1,64 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
 from InstaLiveCLI import InstaLiveCLI
 import json
-from app.utils import fromPickle, toPickle, start_broadcast, stop_broadcast
+from app.utils import start_broadcast, stop_broadcast
 base = Blueprint('base', __name__)
 
 @base.route('/')
 def login_route():
-    return render_template('pages/login.html')
+
+    try:
+        settings = session['settings']
+        print('got settings')
+        return redirect(url_for('base.info_route'))
+
+    except:
+        return render_template('pages/login.html')
 
 @base.route('/dashboard')
 def info_route():
-    return render_template('pages/dashboard.html',data_stream=session['data_stream'])
+
+    try:
+        settings = session['settings']
+    except:
+        return redirect(url_for('base.login_route'))
+
+    print('> Update Broadcast Status')
+    live = InstaLiveCLI(auth=session['settings'])
+    session['settings']['data_stream']['status'] = live.get_broadcast_status()
+    
+    return render_template('pages/dashboard.html',data_stream=session['settings']['data_stream'])
+
+@base.route('/dashboard/refresh_key')
+def refresh_handle():
+    print('> Refreshing Stream Key')
+    live = InstaLiveCLI(auth=session['settings'])
+    live.create_broadcast()
+    session['settings'] = live.settings
+    
+    return redirect(url_for('base.info_route'))
+
+@base.route('/dashboard/logout')
+def logout_handle():
+    session.pop('settings',None)
+    
+    return redirect(url_for('base.login_route'))
 
 @base.route('/login', methods=['POST'])
 def login_handle():
     live = InstaLiveCLI(username=request.form['username'],password=request.form['password'])
+    print('> Login to Instagram Server')
     login_status = live.login()
 
     if login_status:
-        live.create_broadcast()
-        
-        session['settings'] = live.settings
+        print('- Login Success')
 
-        session['data_stream'] = {
-            'broadcast_id':live.broadcast_id,
-            'stream_server':live.stream_server,
-            'stream_key':live.stream_key,
-            'status':'Idle',
-        }
+        print('> Creating Broadcast')
+        live.create_broadcast()
+
+        print(live.settings)
+        print('> Saving Cookies')
+        session['settings'] = live.settings
 
         return redirect(url_for('base.info_route'))
 
