@@ -1,27 +1,23 @@
 import pickle
 from flask import session
 from InstaLiveCLI import InstaLiveCLI
-def toPickle(obj):
-    f = open("pickle_data", "wb")
-    pickle.dump(obj, f)
-    f.close()
-    return True
-
-def fromPickle():
-    f = open("pickle_data", "rb")
-    return pickle.load(f)
 
 def start_broadcast():
     ig = InstaLiveCLI(auth=session['settings'])
-    print(ig)
+    print(session['settings'])
+
+    print('> Starting Broadcast')
     start = ig.start_broadcast()
-    print(start)
+    print('- Broadcast Started',start)
     return start
 
 def stop_broadcast():
-    ig = fromPickle()
-    ig.login(force=True)
-    return ig.end_broadcast()
+    ig = InstaLiveCLI(auth=session['settings'])
+    print(session['settings'])
+    print('> Stopping Broadcast')
+    stop = ig.end_broadcast()
+    print('- Broadcast Stopped', stop)
+    return stop
 
 def get_viewers():
     ig = fromPickle()
