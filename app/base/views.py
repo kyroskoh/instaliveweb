@@ -10,11 +10,22 @@ def login_route():
 
 @base.route('/dashboard')
 def info_route():
-    live = InstaLiveCLI(auth=session['settings'])
 
+    print('> Update Broadcast Status')
+    live = InstaLiveCLI(auth=session['settings'])
     session['settings']['data_stream']['status'] = live.get_broadcast_status()
     
     return render_template('pages/dashboard.html',data_stream=session['settings']['data_stream'])
+
+@base.route('/dashboard/refresh_key')
+def refresh_handle():
+    print('> Refreshing Stream Key')
+    live = InstaLiveCLI(auth=session['settings'])
+    live.create_broadcast()
+    session['settings'] = live.settings
+    
+    return redirect(url_for('base.info_route'))
+
 
 @base.route('/login', methods=['POST'])
 def login_handle():
