@@ -85,6 +85,9 @@
             type="submit"
             class="btn btn-success btn-block"
             id="startBroadcast"
+            {% if data_stream['status'] == 'active' %}
+              disabled
+            {% endif %}
           >
             Start Broadcast
           </button>
@@ -92,7 +95,10 @@
             type="submit"
             class="btn btn-danger btn-block"
             id="stopBroadcast"
-            disabled
+            {% if data_stream['status'] != 'active' %}
+              disabled='false'
+            {% endif %}
+            
           >
             Stop Live
           </button>

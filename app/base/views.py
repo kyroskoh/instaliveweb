@@ -10,7 +10,10 @@ def login_route():
 
 @base.route('/dashboard')
 def info_route():
-    print(session['settings'])
+    live = InstaLiveCLI(auth=session['settings'])
+
+    session['settings']['data_stream']['status'] = live.get_broadcast_status()
+    
     return render_template('pages/dashboard.html',data_stream=session['settings']['data_stream'])
 
 @base.route('/login', methods=['POST'])
