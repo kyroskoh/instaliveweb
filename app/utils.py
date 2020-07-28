@@ -1,5 +1,6 @@
 import pickle
-
+from flask import session
+from InstaLiveCLI import InstaLiveCLI
 def toPickle(obj):
     f = open("pickle_data", "wb")
     pickle.dump(obj, f)
@@ -11,9 +12,11 @@ def fromPickle():
     return pickle.load(f)
 
 def start_broadcast():
-    ig = fromPickle()
-    ig.login(force=True)
-    return ig.start_broadcast()
+    ig = InstaLiveCLI(auth=session['settings'])
+    print(ig)
+    start = ig.start_broadcast()
+    print(start)
+    return start
 
 def stop_broadcast():
     ig = fromPickle()

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
-from ItsAGramLive import ItsAGramLive
+from InstaLiveCLI import InstaLiveCLI
 import json
 from app.utils import fromPickle, toPickle, start_broadcast, stop_broadcast, get_viewers
 
