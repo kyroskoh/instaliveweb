@@ -6,7 +6,14 @@ base = Blueprint('base', __name__)
 
 @base.route('/')
 def login_route():
-    return render_template('pages/login.html')
+
+    try:
+        settings = session['settings']
+        print('got settings')
+        return redirect(url_for('base.info_route'))
+
+    except:
+        return render_template('pages/login.html')
 
 @base.route('/dashboard')
 def info_route():
